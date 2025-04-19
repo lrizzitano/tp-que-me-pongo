@@ -1,5 +1,7 @@
 package org.example;
 
+import static java.util.Objects.requireNonNull;
+
 public class Prenda {
     private Tipo tipo;
     private String material;
@@ -11,9 +13,9 @@ public class Prenda {
     }
 
     public Prenda(Tipo tipo, String material, Color colorPrincipal, Color colorSecuandario) {
-        this.tipo = tipo;
-        this.material = material;
-        this.colorPrincipal = colorPrincipal;
+        this.tipo = requireNonNull(tipo, "El tipo de prenda es obligatiorio");
+        this.material = requireNonNull(material, "El material de la prenda es obligatorio");
+        this.colorPrincipal = requireNonNull(colorPrincipal, "El color principal de prenda es obligatorio");
         this.colorSecuandario = colorSecuandario;
     }
 }
