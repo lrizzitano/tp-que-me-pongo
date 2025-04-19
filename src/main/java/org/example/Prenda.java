@@ -18,4 +18,8 @@ public class Prenda {
         this.colorPrincipal = requireNonNull(colorPrincipal, "El color principal de prenda es obligatorio");
         this.colorSecuandario = colorSecuandario;
     }
+
+    public Categoria Categoria() {
+        return this.tipo.getCategoria();
+    }
 }

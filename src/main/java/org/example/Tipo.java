@@ -8,4 +8,8 @@ public class Tipo {
         this.descripcion = descripcion;
         this.categoria = categoria;
     }
+
+    public Categoria getCategoria() {
+        return this.categoria;
+    }
 }
