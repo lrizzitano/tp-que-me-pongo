@@ -1,0 +1,27 @@
+@startuml
+
+class Atuendo {}
+
+class Prenda {
+    material
+    colorPrincial
+    colorSecuandario
+    --
+    Categoria()
+}
+
+class Tipo {
+    descripcion
+}
+
+class Categoria {
+    nombre
+}
+
+Atuendo ->"*" Prenda
+
+Prenda -> Tipo
+
+Tipo -> Categoria
+
+@enduml
