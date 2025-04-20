@@ -1,15 +1,15 @@
 package org.example;
 
 public class Tipo {
-    private String descripcion;
-    private Categoria categoria;
+  private String descripcion;
+  private Categoria categoria;
 
-    public Tipo(String descripcion, Categoria categoria) {
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-    }
+  public Tipo(String descripcion, Categoria categoria) {
+    this.descripcion = descripcion;
+    this.categoria = categoria;
+  }
 
-    public Categoria getCategoria() {
-        return this.categoria;
-    }
+  public Categoria getCategoria() {
+    return this.categoria;
+  }
 }

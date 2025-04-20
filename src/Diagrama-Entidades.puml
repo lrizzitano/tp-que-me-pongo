@@ -1,27 +1,84 @@
 @startuml
 
-class Atuendo {}
+class Usuario {
+    prendas: Prenda[]
+    borradores: Prenda[]
+    atuendos: Atuendo[]
+    institucion: Institucion
+    --
+    CrearBorrador(Tipo)
+}
+
+class Atuendo {
+    prendas: Prenda[]
+}
+
+class Uniforme {
+    prendaSuperior: Prenda
+    prendaInferior: Prenda
+    calzado: Prenda
+}
+
+class Institucion {
+    uniforme: Uniforme
+}
 
 class Prenda {
-    material
-    colorPrincial
-    colorSecuandario
+    tipo: Tipo
+    material: String
+    trama: Trama
+    colorPrincial: Color
+    colorSecuandario: Color
     --
     Categoria()
 }
 
 class Tipo {
-    descripcion
+    descripcion: String
 }
 
-class Categoria {
-    nombre
+enum Trama {
+    LISA
+    RAYADA
+    LUNARES
+    CUADROS
+    ESTAMPADO
 }
 
-Atuendo ->"*" Prenda
+enum Color {
+    BLANCO
+    NEGRO
+    GRIS
+    ROJO
+    NARANJA
+    AMARILLO
+    VERDE
+    AZUL
+    CELESTE
+    VIOLETA
+    ROSA
+}
 
-Prenda -> Tipo
+enum Categoria {
+    PARTE_SUPERIOR
+    CALZADO
+    PARTE_INFERIOR
+    ACCESORIOS
+}
 
-Tipo -> Categoria
+Atuendo -->"*" Prenda
+Uniforme -->"*" Prenda
+
+Usuario -->"*" Prenda
+Usuario -->"*" Atuendo
+Usuario -l-> Institucion
+
+Institucion --> Uniforme
+
+Prenda -l-> Tipo
+Prenda --> Trama
+Prenda -> Color
+
+Tipo --> Categoria
 
 @enduml
