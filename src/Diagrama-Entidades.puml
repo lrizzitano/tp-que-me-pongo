@@ -13,19 +13,9 @@ class Atuendo {
     prendas: Prenda[]
 }
 
-class Uniforme {
-    prendaSuperior: Prenda
-    prendaInferior: Prenda
-    calzado: Prenda
-}
-
-class Institucion {
-    uniforme: Uniforme
-}
-
 class Prenda {
-    tipo: Tipo
-    material: String
+    tipo: TipoDePrenda
+    material: Material
     trama: Trama
     colorPrincial: Color
     colorSecuandario: Color
@@ -33,7 +23,22 @@ class Prenda {
     Categoria()
 }
 
-class Tipo {
+class PrendaBorrador {
+    tipo: TipoDePrenda
+    material: Material
+    trama: Trama
+    colorPrincial: Color
+    colorSecuandario: Color
+    --
+    setTipo(Tipo)
+    setMaterial(Material)
+    setTrama(Trama)
+    setColorPrincipal(Color)
+    setColorSecundario(Color)
+    crearPrenda()
+}
+
+class TipoDePrenda {
     descripcion: String
 }
 
@@ -66,18 +71,25 @@ enum Categoria {
     ACCESORIOS
 }
 
+enum Material {
+    ALGODON
+    LANA
+    JEAN
+    CUERO
+}
+
 Atuendo -->"*" Prenda
-Uniforme -->"*" Prenda
 
 Usuario -->"*" Prenda
+Usuario --> PrendaBorrador
 Usuario -->"*" Atuendo
-Usuario -l-> Institucion
 
-Institucion --> Uniforme
+PrendaBorrador ..> Prenda
 
 Prenda -l-> Tipo
 Prenda --> Trama
 Prenda -> Color
+Prenda --> Material
 
 Tipo --> Categoria
 
