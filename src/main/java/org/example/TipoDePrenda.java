@@ -1,10 +1,10 @@
 package org.example;
 
-public class Tipo {
+public class TipoDePrenda {
   private String descripcion;
   private Categoria categoria;
 
-  public Tipo(String descripcion, Categoria categoria) {
+  public TipoDePrenda(String descripcion, Categoria categoria) {
     this.descripcion = descripcion;
     this.categoria = categoria;
   }
