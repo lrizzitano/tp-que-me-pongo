@@ -6,6 +6,7 @@ public class PrendaBorrador {
   private TipoDePrenda tipo;
   private Material material;
   private Trama trama;
+  private Formalidad formalidad;
   private Color colorPrincipal;
   private Color colorSecuandario;
 
@@ -26,6 +27,10 @@ public class PrendaBorrador {
     this.trama = requireNonNull(trama);
   }
 
+  public void setFormalidad(Formalidad formalidad) {
+    this.formalidad = requireNonNull(formalidad);
+  }
+
   public void setColorPrincipal(Color colorPrincipal) {
     this.colorPrincipal = requireNonNull(colorPrincipal);
   }
@@ -37,6 +42,6 @@ public class PrendaBorrador {
   public Prenda construirPrenda() {
     requireNonNull(material);
     requireNonNull(colorPrincipal);
-    return new Prenda(tipo, material, trama, colorPrincipal, colorSecuandario);
+    return new Prenda(tipo, material, trama, formalidad, colorPrincipal, colorSecuandario);
   }
 }

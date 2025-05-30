@@ -4,11 +4,12 @@ public class Prenda {
   private TipoDePrenda tipo;
   private Material material;
   private Trama trama;
+  private Formalidad formalidad;
   private Color colorPrincipal;
   private Color colorSecuandario;
 
   public Prenda(
-      TipoDePrenda tipo, Material material, Trama trama, Color colorPrincipal, Color colorSecuandario
+      TipoDePrenda tipo, Material material, Trama trama, Formalidad formalidad, Color colorPrincipal, Color colorSecuandario
   ) {
     this.tipo = tipo;
     this.material = material;
@@ -17,8 +18,16 @@ public class Prenda {
     this.colorSecuandario = colorSecuandario;
   }
 
-  public Prenda(TipoDePrenda tipo, Material material, Trama trama, Color colorPrincipal) {
-    this(tipo, material, trama, colorPrincipal, null);
+  public Prenda(TipoDePrenda tipo, Material material, Trama trama, Formalidad formalidad, Color colorPrincipal) {
+    this(tipo, material, trama, formalidad, colorPrincipal, null);
+  }
+
+  public boolean esDeCategoria(Categoria categoria) {
+    return this.getCategoria() == categoria;
+  }
+
+  public boolean esDeFormalidad(Formalidad formalidad) {
+    return this.formalidad == formalidad;
   }
 
   public Categoria getCategoria() {
