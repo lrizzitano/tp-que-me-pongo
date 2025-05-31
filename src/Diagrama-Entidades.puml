@@ -94,6 +94,7 @@ enum Material {
 }
 
 Atuendo -->"*" Prenda
+Atuendo -[hidden]r- PrendaBorrador
 
 Usuario -->"*" Prenda
 Usuario --> PrendaBorrador
@@ -109,13 +110,11 @@ Prenda --> Material
 
 TipoDePrenda --> Categoria
 
-ProveedorDeMotores -l-> MotorDeSugerencias
+ProveedorDeMotores --> MotorDeSugerencias
 
 MotorDeSugerenciasEstandar -u-|> MotorDeSugerencias
 MotorDeSugerenciasEstandar .r.> Atuendo
 
 MotorDeSugerenciasFormales .u.|> MotorDeSugerenciasEstandar
-MotorDeSugerenciasFormales .r.> Atuendo
-
 
 @enduml
