@@ -1,12 +1,11 @@
 @startuml
 
 class Usuario {
+    edad: int
     prendas: Prenda[]
-    borradores: Prenda[]
-    atuendos: Atuendo[]
-    institucion: Institucion
     --
-    CrearBorrador(Tipo)
+    guardarBorrador(PrendaBorrador)
+    sugerirAtuendos()
 }
 
 class Atuendo {
@@ -40,6 +39,22 @@ class PrendaBorrador {
 
 class TipoDePrenda {
     descripcion: String
+}
+
+class ProveedorDeMotores {
+    MotorDeSugerencias
+}
+
+interface MotorDeSugerencias {
+    sugerirAtuendos(Prenda[], Usuario)
+}
+
+class MotorDeSugerenciasEstandar {
+    sugerirAtuendos(Prenda[], Usuario)
+}
+
+class MotorDeSugerenciasFormales {
+    sugerirAtuendos(Prenda[], Usuario)
 }
 
 enum Trama {
@@ -83,14 +98,24 @@ Atuendo -->"*" Prenda
 Usuario -->"*" Prenda
 Usuario --> PrendaBorrador
 Usuario -->"*" Atuendo
+Usuario .l.> ProveedorDeMotores
 
 PrendaBorrador ..> Prenda
 
-Prenda -l-> Tipo
+Prenda -l-> TipoDePrenda
 Prenda --> Trama
 Prenda -> Color
 Prenda --> Material
 
-Tipo --> Categoria
+TipoDePrenda --> Categoria
+
+ProveedorDeMotores -l-> MotorDeSugerencias
+
+MotorDeSugerenciasEstandar -u-|> MotorDeSugerencias
+MotorDeSugerenciasEstandar .r.> Atuendo
+
+MotorDeSugerenciasFormales .u.|> MotorDeSugerenciasEstandar
+MotorDeSugerenciasFormales .r.> Atuendo
+
 
 @enduml
