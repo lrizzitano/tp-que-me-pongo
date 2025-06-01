@@ -3,7 +3,7 @@ package org.example;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MotorDeSugerenciasFormales extends MotorDeSugerenciasEstandar {
+public class MotorDeSugerenciasFormales extends MotorDeSugerencias {
 
   public MotorDeSugerenciasFormales() {
     super();
