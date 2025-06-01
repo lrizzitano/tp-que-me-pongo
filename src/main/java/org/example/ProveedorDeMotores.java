@@ -3,7 +3,7 @@ package org.example;
 public class ProveedorDeMotores {
   private static final ProveedorDeMotores instance = new ProveedorDeMotores();
 
-  private MotorDeSugerenciasEstandar motorDeSugerencias;
+  private MotorDeSugerencias motorDeSugerencias;
 
   private ProveedorDeMotores() {}
 
@@ -11,11 +11,11 @@ public class ProveedorDeMotores {
     return instance;
   }
 
-  public void setMotorDeSugerencias(MotorDeSugerenciasEstandar motorDeSugerencias) {
+  public void setMotorDeSugerencias(MotorDeSugerencias motorDeSugerencias) {
     this.motorDeSugerencias = motorDeSugerencias;
   }
 
-  public MotorDeSugerenciasEstandar getMotorDeSugerencias() {
+  public MotorDeSugerencias getMotorDeSugerencias() {
     return motorDeSugerencias;
   }
 }
