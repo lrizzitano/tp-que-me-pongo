@@ -2,7 +2,9 @@
 
 class Usuario {
     edad: int
+    ciudad: String
     prendas: Prenda[]
+    motorDeSugerencias: MotorDeSugerencias
     --
     guardarBorrador(PrendaBorrador)
     sugerirAtuendos()
@@ -20,6 +22,9 @@ class Prenda {
     colorSecuandario: Color
     --
     Categoria()
+    esDeCategoria(Categoria categoria)
+    esDeFormalidad(Formalidad formalidad)
+    esParaTemperatura(double temperatura)
 }
 
 class PrendaBorrador {
@@ -39,22 +44,36 @@ class PrendaBorrador {
 
 class TipoDePrenda {
     descripcion: String
+    temperaturaDeUso: RangoDeTemperaturas
+    --
+    esParaTemperatura(double temperatura)
 }
 
-class ProveedorDeMotores {
-    MotorDeSugerencias
-}
-
-interface MotorDeSugerencias {
-    sugerirAtuendos(Prenda[], Usuario)
-}
-
-class MotorDeSugerenciasEstandar {
+class MotorDeSugerencias {
+    servicioMeteorologico
+    --
     sugerirAtuendos(Prenda[], Usuario)
 }
 
 class MotorDeSugerenciasFormales {
     sugerirAtuendos(Prenda[], Usuario)
+}
+
+class RangoDeTemperaturas {
+    temperaturaMayor: double
+    temperaturaMenor: double
+    --
+    contiene(double temperatura)
+}
+
+interface ServicioMeteorologico {
+    getTemperatura(String ciudad)
+}
+
+class ServicioMeteorologicoAccuWeather {
+    api
+    --
+    getTemperatura(String ciudad);
 }
 
 enum Trama {
@@ -99,7 +118,7 @@ Atuendo -[hidden]r- PrendaBorrador
 Usuario -->"*" Prenda
 Usuario --> PrendaBorrador
 Usuario -->"*" Atuendo
-Usuario .l.> ProveedorDeMotores
+Usuario -l-> MotorDeSugerencias
 
 PrendaBorrador ..> Prenda
 
@@ -109,12 +128,13 @@ Prenda -> Color
 Prenda --> Material
 
 TipoDePrenda --> Categoria
+TipoDePrenda -l-> RangoDeTemperaturas
 
-ProveedorDeMotores --> MotorDeSugerencias
+MotorDeSugerencias .r.> Atuendo
+MotorDeSugerencias -l-> ServicioMeteorologico
 
-MotorDeSugerenciasEstandar -u-|> MotorDeSugerencias
-MotorDeSugerenciasEstandar .r.> Atuendo
+MotorDeSugerenciasFormales -u-|> MotorDeSugerencias
 
-MotorDeSugerenciasFormales .u.|> MotorDeSugerenciasEstandar
+ServicioMeteorologicoAccuWeather .u.|> ServicioMeteorologico
 
 @enduml
