@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MotorDeSugerenciasEstandar implements MotorDeSugerencias {
+public class MotorDeSugerenciasEstandar extends MotorDeSugerencias {
+
+  public MotorDeSugerenciasEstandar() {
+    super();
+  }
 
   public List<Atuendo> sugerirAtuendos(List<Prenda> prendas, Usuario usuario) {
     List<Prenda> prendasSuperiores = this.filtrarPorCategoria(prendas, Categoria.PARTE_SUPERIOR);
