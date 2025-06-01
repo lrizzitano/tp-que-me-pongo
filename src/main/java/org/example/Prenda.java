@@ -18,6 +18,10 @@ public class Prenda {
     this.colorSecuandario = colorSecuandario;
   }
 
+  public Categoria getCategoria() {
+    return this.tipo.getCategoria();
+  }
+
   public Prenda(TipoDePrenda tipo, Material material, Trama trama, Formalidad formalidad, Color colorPrincipal) {
     this(tipo, material, trama, formalidad, colorPrincipal, null);
   }
@@ -30,7 +34,7 @@ public class Prenda {
     return this.formalidad == formalidad;
   }
 
-  public Categoria getCategoria() {
-    return this.tipo.getCategoria();
+  public boolean esParaTemperatura(double temperatura) {
+    return this.tipo.esParaTemperatura(temperatura);
   }
 }
