@@ -5,10 +5,19 @@ import java.util.List;
 
 public class Usuario {
   private int edad;
-  private List<Prenda> prendas = new ArrayList<>();
+  private String ciudad;
+  private List<Prenda> prendas;
+  private MotorDeSugerencias motorDeSugerencias;
 
-  public Usuario(int edad) {
+  public Usuario(int edad, String ciudad) {
     this.edad = edad;
+    this.ciudad = ciudad;
+    this.prendas = new ArrayList<>();
+    this.motorDeSugerencias = ProveedorDeMotores.instance().getMotorDeSugerencias();
+  }
+
+  public String getCiudad() {
+    return this.ciudad;
   }
 
   public void guardarBorrador(PrendaBorrador borrador) {
@@ -16,7 +25,7 @@ public class Usuario {
   }
 
   public List<Atuendo> sugerirAtuendos() {
-    return ProveedorDeMotores.instance().getMotorDeSugerencias().sugerirAtuendos(prendas, this);
+    return motorDeSugerencias.sugerirAtuendos(prendas, this);
   }
 
   public boolean esAdultoMayor() {
