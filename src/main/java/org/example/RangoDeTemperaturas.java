@@ -13,12 +13,4 @@ public class RangoDeTemperaturas {
     return (temperatura < temperaturaMayor
       && temperatura > temperaturaMenor);
   }
-
-  public double getTemperaturaMayor() {
-    return temperaturaMayor;
-  }
-
-  public double getTemperaturaMenor() {
-    return temperaturaMenor;
-  }
 }
