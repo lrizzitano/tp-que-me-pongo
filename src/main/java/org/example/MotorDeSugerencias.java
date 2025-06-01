@@ -23,7 +23,7 @@ public class MotorDeSugerencias {
     List<Prenda> prendasSuperiores = this.filtrarPorCategoria(prendas, Categoria.PARTE_SUPERIOR);
     List<Prenda> prendasInferiores = this.filtrarPorCategoria(prendas, Categoria.PARTE_INFERIOR);
     List<Prenda> calzados = this.filtrarPorCategoria(prendas, Categoria.CALZADO);
-    List<Atuendo> atuendos = new ArrayList<Atuendo>();
+    List<Atuendo> atuendos = new ArrayList<>();
 
     for (Prenda prendaSuperior : prendasSuperiores) {
       for (Prenda prendaInferior : prendasInferiores) {

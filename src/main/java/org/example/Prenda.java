@@ -18,12 +18,12 @@ public class Prenda {
     this.colorSecuandario = colorSecuandario;
   }
 
-  public Categoria getCategoria() {
-    return this.tipo.getCategoria();
-  }
-
   public Prenda(TipoDePrenda tipo, Material material, Trama trama, Formalidad formalidad, Color colorPrincipal) {
     this(tipo, material, trama, formalidad, colorPrincipal, null);
+  }
+
+  public Categoria getCategoria() {
+    return this.tipo.getCategoria();
   }
 
   public boolean esDeCategoria(Categoria categoria) {
