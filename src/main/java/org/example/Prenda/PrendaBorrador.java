@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Prenda;
 
 import static java.util.Objects.requireNonNull;
 

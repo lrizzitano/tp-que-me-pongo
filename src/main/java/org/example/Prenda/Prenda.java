@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Prenda;
 
 public class Prenda {
   private TipoDePrenda tipo;

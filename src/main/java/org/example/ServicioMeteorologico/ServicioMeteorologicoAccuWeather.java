@@ -1,4 +1,4 @@
-package org.example;
+package org.example.ServicioMeteorologico;
 
 import java.util.Map;
 

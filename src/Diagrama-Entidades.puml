@@ -1,13 +1,13 @@
 @startuml
 
 class Usuario {
-    edad: int
-    ciudad: String
-    prendas: Prenda[]
-    motorDeSugerencias: MotorDeSugerencias
+    - edad: int
+    - ciudad: String
+    - prendas: Prenda[]
+    - motorDeSugerencias: MotorDeSugerencias
     --
-    guardarBorrador(PrendaBorrador)
-    sugerirAtuendos()
+    + guardarBorrador(PrendaBorrador)
+    + sugerirAtuendos()
 }
 
 class Atuendo {
@@ -15,65 +15,66 @@ class Atuendo {
 }
 
 class Prenda {
-    tipo: TipoDePrenda
-    material: Material
-    trama: Trama
-    colorPrincial: Color
-    colorSecuandario: Color
+    - tipo: TipoDePrenda
+    - material: Material
+    - trama: Trama
+    - formalidad: Formalidad
+    - colorPrincial: Color
+    - colorSecuandario: Color
     --
-    Categoria()
-    esDeCategoria(Categoria categoria)
-    esDeFormalidad(Formalidad formalidad)
-    esParaTemperatura(double temperatura)
+    + Categoria()
+    + esDeCategoria(Categoria categoria)
+    + esDeFormalidad(Formalidad formalidad)
+    + esParaTemperatura(double temperatura)
 }
 
 class PrendaBorrador {
-    tipo: TipoDePrenda
-    material: Material
-    trama: Trama
-    colorPrincial: Color
-    colorSecuandario: Color
+    - tipo: TipoDePrenda
+    - material: Material
+    - trama: Trama
+    - colorPrincial: Color
+    - colorSecuandario: Color
     --
-    setTipo(Tipo)
-    setMaterial(Material)
-    setTrama(Trama)
-    setColorPrincipal(Color)
-    setColorSecundario(Color)
-    crearPrenda()
+    + setTipo(Tipo)
+    + setMaterial(Material)
+    + setTrama(Trama)
+    + setColorPrincipal(Color)
+    + setColorSecundario(Color)
+    + crearPrenda()
 }
 
 class TipoDePrenda {
-    descripcion: String
-    temperaturaDeUso: RangoDeTemperaturas
+    - descripcion: String
+    - temperaturaDeUso: RangoDeTemperaturas
     --
-    esParaTemperatura(double temperatura)
+    + esParaTemperatura(double temperatura)
 }
 
 class MotorDeSugerencias {
-    servicioMeteorologico
+    - servicioMeteorologico
     --
-    sugerirAtuendos(Prenda[], Usuario)
+    + sugerirAtuendos(Prenda[], Usuario)
 }
 
 class MotorDeSugerenciasFormales {
-    sugerirAtuendos(Prenda[], Usuario)
+    + sugerirAtuendos(Prenda[], Usuario)
 }
 
 class RangoDeTemperaturas {
-    temperaturaMayor: double
-    temperaturaMenor: double
+    - temperaturaMayor: double
+    - temperaturaMenor: double
     --
-    contiene(double temperatura)
+    + contiene(double temperatura)
 }
 
 interface ServicioMeteorologico {
-    getTemperatura(String ciudad)
+    + getTemperatura(String ciudad)
 }
 
 class ServicioMeteorologicoAccuWeather {
-    api
+    - api
     --
-    getTemperatura(String ciudad);
+    + getTemperatura(String ciudad);
 }
 
 enum Trama {
@@ -112,6 +113,12 @@ enum Material {
     CUERO
 }
 
+enum Formalidad {
+    FORMAL
+    NEUTRO
+    INFORMAL
+}
+
 Atuendo -->"*" Prenda
 Atuendo -[hidden]r- PrendaBorrador
 
@@ -123,9 +130,10 @@ Usuario -l-> MotorDeSugerencias
 PrendaBorrador ..> Prenda
 
 Prenda -l-> TipoDePrenda
-Prenda --> Trama
-Prenda -> Color
 Prenda --> Material
+Prenda --> Trama
+Prenda --> Formalidad
+Prenda -> Color
 
 TipoDePrenda --> Categoria
 TipoDePrenda -l-> RangoDeTemperaturas

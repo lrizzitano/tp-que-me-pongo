@@ -2,6 +2,10 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.MotorDeSugerencias.MotorDeSugerencias;
+import org.example.MotorDeSugerencias.ProveedorDeMotores;
+import org.example.Prenda.Prenda;
+import org.example.Prenda.PrendaBorrador;
 
 public class Usuario {
   private int edad;

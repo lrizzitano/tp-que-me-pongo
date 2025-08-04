@@ -1,16 +1,22 @@
-package org.example;
+package org.example.MotorDeSugerencias;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.example.Atuendo;
+import org.example.Prenda.Categoria;
+import org.example.Prenda.Prenda;
+import org.example.ServicioMeteorologico.ProveedorDeServicioMeteorologico;
+import org.example.ServicioMeteorologico.ServicioMeteorologico;
+import org.example.Usuario;
 
 public class MotorDeSugerencias {
 
   private ServicioMeteorologico servicioMeteorologico;
 
   public MotorDeSugerencias() {
-    this.servicioMeteorologico = ProveedorDeClima.instance().getServicioMeteorologico();
+    this.servicioMeteorologico = ProveedorDeServicioMeteorologico.instance().getServicioMeteorologico();
   }
 
   public List<Atuendo> sugerirAtuendos(List<Prenda> prendas, Usuario usuario) {

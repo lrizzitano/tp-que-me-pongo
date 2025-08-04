@@ -1,13 +1,13 @@
-package org.example;
+package org.example.ServicioMeteorologico;
 
-public class ProveedorDeClima {
-  private static final ProveedorDeClima instance = new ProveedorDeClima();
+public class ProveedorDeServicioMeteorologico {
+  private static final ProveedorDeServicioMeteorologico instance = new ProveedorDeServicioMeteorologico();
 
   private ServicioMeteorologico servicioMeteorologico;
 
-  private ProveedorDeClima() {}
+  private ProveedorDeServicioMeteorologico() {}
 
-  public static ProveedorDeClima instance() {
+  public static ProveedorDeServicioMeteorologico instance() {
     return instance;
   }
 

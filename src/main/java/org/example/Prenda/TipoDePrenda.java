@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Prenda;
 
 public class TipoDePrenda {
   private String descripcion;
