@@ -73,8 +73,18 @@ interface ServicioMeteorologico {
 
 class ServicioMeteorologicoAccuWeather {
     - api
+    - ultimasRespuestas
+    - llamadosDiarios
     --
     + getTemperatura(String ciudad);
+}
+
+class RespuestaDeClima {
+    - limiteExpiracion
+    - respuesta
+    --
+    + getTemperatura()
+    + expiro()
 }
 
 enum Trama {
@@ -144,5 +154,6 @@ MotorDeSugerencias -l-> ServicioMeteorologico
 MotorDeSugerenciasFormales -u-|> MotorDeSugerencias
 
 ServicioMeteorologicoAccuWeather .u.|> ServicioMeteorologico
+ServicioMeteorologicoAccuWeather -u->"*" RespuestaDeClima
 
 @enduml
