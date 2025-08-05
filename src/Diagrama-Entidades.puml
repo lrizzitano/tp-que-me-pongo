@@ -21,34 +21,33 @@ class Guardaropa {
 }
 
 class GuardaropaCompartido extends Guardaropa {
-    - propuestasPendientes: PropuestaDeCambio[]
-    - propuestasAceptadas: PropuestaDeCambio[]
+    - propuestasDeCambio: PropuestaDeCambio[]
     --
     + agregarPropuesta(propuesta)
-    + aceptarPropuesta(propuesta)
-    + deshacerPropuesta(propuesta)
-    + rechazarPropueta(propuesta)
 }
 
 abstract class PropuestaDeCambio {
     # prenda: Prenda
     # guardaropa: GuardaropaCompartido
+    # estado: EstadoPropuesta
     --
-    + {abstract} aceptar()
-    + {abstract} deshacer()
+    + aceptar()
+    + deshacer()
     + rechazar()
+    + {abstract} aplicarEnGuardaropa()
+    + {abstract} revertirEnGuardaropa()
 }
 
 class PropuestaDeAgregado extends PropuestaDeCambio {
     --
-    + aplicar()
-    + deshacer()
+    + aplicarEnGuardaropa()
+    + revertirEnGuardaropa()
 }
 
 class PropuestaDeQuitado extends PropuestaDeCambio {
     --
-    + aplicar()
-    + deshacer()
+    + aplicarEnGuardaropa()
+    + revertirEnGuardaropa()
 }
 
 class Atuendo {
@@ -170,11 +169,17 @@ enum Formalidad {
     INFORMAL
 }
 
+enum EstadoPropuesta {
+    PENDIENTE
+    ACEPTADA
+    RECHAZADA
+}
+
 Atuendo -->"*" Prenda
 Atuendo -[hidden]r- PrendaBorrador
 
 Usuario --> PrendaBorrador
-Usuario -->"*" Atuendo
+Usuario ..> Atuendo
 Usuario -l-> MotorDeSugerencias
 Usuario "*"-r->"*" Guardaropa
 
@@ -183,15 +188,17 @@ Guardaropa -->"*" Prenda
 GuardaropaCompartido -->"*" PropuestaDeCambio
 
 PropuestaDeCambio --> Prenda
+PropuestaDeCambio -> EstadoPropuesta
 
 PrendaBorrador ..> Prenda
 
-Prenda --> TipoDePrenda
+Prenda -l-> TipoDePrenda
 Prenda --> Material
 Prenda --> Trama
 Prenda --> Formalidad
 Prenda --> Color
 
+TipoDePrenda -[hidden]u-- MotorDeSugerenciasFormales
 TipoDePrenda --> Categoria
 TipoDePrenda --> RangoDeTemperaturas
 

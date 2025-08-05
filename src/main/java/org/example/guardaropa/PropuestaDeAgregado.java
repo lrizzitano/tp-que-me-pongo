@@ -8,14 +8,12 @@ public class PropuestaDeAgregado extends PropuestaDeCambio {
   }
 
   @Override
-  public void aceptar() {
-    this.guardaropa.aceptarPropuesta(this);
+  public void aplicarEnGuardaropa() {
     this.guardaropa.agregarPrenda(this.prenda);
   }
 
   @Override
-  public void deshacer() {
-    this.guardaropa.deshacerPropuesta(this);
+  public void revertirEnGuardaropa() {
     this.guardaropa.quitarPrenda(this.prenda);
   }
 }
