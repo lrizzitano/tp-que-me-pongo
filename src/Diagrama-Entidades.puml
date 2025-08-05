@@ -2,6 +2,7 @@
 
 class Usuario {
     - edad: int
+    - mail: String
     - ciudad: String
     - borradores: PrendaBorrador[]
     - guardaropas: Guardaropa[]
@@ -119,10 +120,10 @@ class RangoDeTemperaturas {
 }
 
 abstract class ServicioMeteorologico {
-    - cacheClimas
-    - cacheAlertas
-    - llamadosDiarios
-    - interesadosEnAlertas
+    # cacheClimas
+    # cacheAlertas
+    # llamadosDiarios
+    # interesadosEnAlertas
     --
     + {abstract} actualizarClima(String ciudad)
     + {abstract} actualizarAlertas(String ciudad)
@@ -133,7 +134,7 @@ abstract class ServicioMeteorologico {
 }
 
 abstract class InteresadoEnAlertas {
-    - suscriptos
+    # suscriptos
     --
     + suscribir(usuario)
     + desuscribir(usuario)
@@ -147,12 +148,19 @@ class GestorDeNotificacionesPorAlertas {
     + notificar(usuario, menaje)
 }
 
+interface NotificationService {
+    + notify(mensaje)
+}
+
 class GestorDeMailsPorAlertas {
     - mailSender
     --
     + anteAlerta(alertas)
-    'suscriptores.forEach(u -> if(alertas.get(u.getCiudad()).isNotEmpty()){ this.enviar(u, alertas.get(u.getCiudad()) })
     + enviar(usuario, mail)
+}
+
+interface MailSender {
+    + send(direccion, mensaje)
 }
 
 class ActualizadorDeSugerenciasDiariasPorAlertas {
@@ -265,7 +273,12 @@ ServicioMeteorologicoAccuWeather -u->"*" RespuestaDeClima
 RespuestaDeClima -[hidden]r- ServicioMeteorologico
 
 ActualizadorDeSugerenciasDiariasPorAlertas .u.|> InteresadoEnAlertas
+
 GestorDeNotificacionesPorAlertas .u.|> InteresadoEnAlertas
+GestorDeNotificacionesPorAlertas --> NotificationService
+
 GestorDeMailsPorAlertas .u.|> InteresadoEnAlertas
+GestorDeMailsPorAlertas --> MailSender
+
 
 @enduml
