@@ -14,6 +14,10 @@ public class Guardaropa {
     this.prendas = new ArrayList<Prenda>();
   }
 
+  public List<Prenda> getPrendas() {
+    return prendas;
+  }
+
   public void agregarPrenda(Prenda prenda) {
     this.prendas.add(prenda);
   }

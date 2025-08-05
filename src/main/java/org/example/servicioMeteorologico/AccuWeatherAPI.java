@@ -25,4 +25,10 @@ public final class AccuWeatherAPI {
       }});
     }});
   }
+
+  public final List<Map<String, List<String>>> getAlerts(String ciudad) {
+    return Arrays.asList(new HashMap<String, List<String>>() {{
+      put("CurrentAlerts", Arrays.asList("STORM", "HAIL", "WIND"));
+    }});
+  }
 }

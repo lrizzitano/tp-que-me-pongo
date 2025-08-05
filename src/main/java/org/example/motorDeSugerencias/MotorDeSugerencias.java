@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.example.Atuendo;
 import org.example.prenda.Categoria;
 import org.example.prenda.Prenda;
 import org.example.servicioMeteorologico.ProveedorDeServicioMeteorologico;
 import org.example.servicioMeteorologico.ServicioMeteorologico;
-import org.example.Usuario;
+import org.example.usuario.Usuario;
 
 public class MotorDeSugerencias {
 
@@ -19,10 +18,17 @@ public class MotorDeSugerencias {
     this.servicioMeteorologico = ProveedorDeServicioMeteorologico.instance().getServicioMeteorologico();
   }
 
-  public List<Atuendo> sugerirAtuendos(List<Prenda> prendas, Usuario usuario) {
-    List<Prenda> prendasValidas = this.filtrarPorTemperatura(prendas, usuario);
+  public List<Atuendo> sugerirAtuendos(Usuario usuario) {
+    return this.combinarPrendas(this.prendasValidas(usuario));
+  }
 
-    return this.combinarPrendas(prendasValidas);
+  public Atuendo getSugerenciaDiaria(Usuario usuario) {
+    List<Atuendo> atuendosPosibles = this.sugerirAtuendos(usuario);
+    return atuendosPosibles.get((int) (Math.random() * atuendosPosibles.size()));
+  }
+
+  protected List<Prenda> prendasValidas(Usuario usuario) {
+    return this.prendasParaTemperatura(usuario);
   }
 
   private List<Atuendo> combinarPrendas(List<Prenda> prendas) {
@@ -42,15 +48,15 @@ public class MotorDeSugerencias {
     return atuendos;
   }
 
-  public List<Prenda> filtrarPorCategoria(List<Prenda> prendas, Categoria categoria) {
+  private List<Prenda> filtrarPorCategoria(List<Prenda> prendas, Categoria categoria) {
     return prendas.stream().filter(prenda ->
         prenda.esDeCategoria(categoria)).collect(Collectors.toList());
   }
 
-  public List<Prenda> filtrarPorTemperatura(List<Prenda> prendas, Usuario usuario) {
+  private List<Prenda> prendasParaTemperatura(Usuario usuario) {
     double temperatura = servicioMeteorologico.getTemperatura(usuario.getCiudad());
 
-    return prendas.stream().filter(prenda ->
+    return usuario.getPrendasDisponibles().stream().filter(prenda ->
             prenda.esParaTemperatura(temperatura)).collect(Collectors.toList());
   }
 }

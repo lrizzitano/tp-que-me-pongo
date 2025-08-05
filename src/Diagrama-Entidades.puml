@@ -6,10 +6,12 @@ class Usuario {
     - borradores: PrendaBorrador[]
     - guardaropas: Guardaropa[]
     - motorDeSugerencias: MotorDeSugerencias
+    - sugerenciaDiaria
     --
     + getPrendasDisponibles()
     + guardarBorrador(borrador, guardaropa)
     + sugerirAtuendos()
+    + actualizarSugerenciaDiaria()
 }
 
 class Guardaropa {
@@ -93,11 +95,20 @@ class TipoDePrenda {
 class MotorDeSugerencias {
     - servicioMeteorologico
     --
-    + sugerirAtuendos(Prenda[], Usuario)
+    + sugerirAtuendos(Usuario)
+    + getSugerenciaDiaria(Usuario)
 }
 
 class MotorDeSugerenciasFormales {
-    + sugerirAtuendos(Prenda[], Usuario)
+    + sugerirAtuendos(Usuario)
+}
+
+class UsuariosRepo {
+    - usuarios
+    --
+    + agregar(Usuario)
+    + quitar(Usuario)
+    + actualizarSugerenciasDiarias()
 }
 
 class RangoDeTemperaturas {
@@ -107,16 +118,53 @@ class RangoDeTemperaturas {
     + contiene(double temperatura)
 }
 
-interface ServicioMeteorologico {
+abstract class ServicioMeteorologico {
+    - cacheClimas
+    - cacheAlertas
+    - llamadosDiarios
+    - interesadosEnAlertas
+    --
+    + {abstract} actualizarClima(String ciudad)
+    + {abstract} actualizarAlertas(String ciudad)
     + getTemperatura(String ciudad)
+    + getAlertas(String ciudad)
+    + getAlertasGlobales()
+    + actualizarAlertasGlobales()
+}
+
+abstract class InteresadoEnAlertas {
+    - suscriptos
+    --
+    + suscribir(usuario)
+    + desuscribir(usuario)
+    + {abstract} anteAlerta(alertas)
+}
+
+class GestorDeNotificacionesPorAlertas {
+    - notificationService
+    --
+    + anteAlerta(alertas)
+    + notificar(usuario, menaje)
+}
+
+class GestorDeMailsPorAlertas {
+    - mailSender
+    --
+    + anteAlerta(alertas)
+    'suscriptores.forEach(u -> if(alertas.get(u.getCiudad()).isNotEmpty()){ this.enviar(u, alertas.get(u.getCiudad()) })
+    + enviar(usuario, mail)
+}
+
+class ActualizadorDeSugerenciasDiariasPorAlertas {
+    --
+    + anteAlerta(alertas)
 }
 
 class ServicioMeteorologicoAccuWeather {
     - api
-    - ultimasRespuestas
-    - llamadosDiarios
     --
-    + getTemperatura(String ciudad);
+    + actualizarClima(String ciudad)
+    + actualizarAlertas(String ciudad)
 }
 
 class RespuestaDeClima {
@@ -178,6 +226,8 @@ enum EstadoPropuesta {
 Atuendo -->"*" Prenda
 Atuendo -[hidden]r- PrendaBorrador
 
+UsuariosRepo -->"*" Usuario
+
 Usuario --> PrendaBorrador
 Usuario ..> Atuendo
 Usuario -l-> MotorDeSugerencias
@@ -207,7 +257,15 @@ MotorDeSugerencias -l-> ServicioMeteorologico
 
 MotorDeSugerenciasFormales -u-|> MotorDeSugerencias
 
-ServicioMeteorologicoAccuWeather .u.|> ServicioMeteorologico
+ServicioMeteorologico -->"*" InteresadoEnAlertas
+
+ServicioMeteorologicoAccuWeather -u-|> ServicioMeteorologico
 ServicioMeteorologicoAccuWeather -u->"*" RespuestaDeClima
+
+RespuestaDeClima -[hidden]r- ServicioMeteorologico
+
+ActualizadorDeSugerenciasDiariasPorAlertas .u.|> InteresadoEnAlertas
+GestorDeNotificacionesPorAlertas .u.|> InteresadoEnAlertas
+GestorDeMailsPorAlertas .u.|> InteresadoEnAlertas
 
 @enduml
