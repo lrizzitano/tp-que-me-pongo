@@ -1,4 +1,4 @@
-package org.example.ServicioMeteorologico;
+package org.example.servicioMeteorologico;
 
 public interface ServicioMeteorologico {
 

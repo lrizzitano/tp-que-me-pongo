@@ -1,4 +1,4 @@
-package org.example.Prenda;
+package org.example.prenda;
 
 public class RangoDeTemperaturas {
   private double temperaturaMayor;

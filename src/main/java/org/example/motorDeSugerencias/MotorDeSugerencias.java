@@ -1,14 +1,14 @@
-package org.example.MotorDeSugerencias;
+package org.example.motorDeSugerencias;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.example.Atuendo;
-import org.example.Prenda.Categoria;
-import org.example.Prenda.Prenda;
-import org.example.ServicioMeteorologico.ProveedorDeServicioMeteorologico;
-import org.example.ServicioMeteorologico.ServicioMeteorologico;
+import org.example.prenda.Categoria;
+import org.example.prenda.Prenda;
+import org.example.servicioMeteorologico.ProveedorDeServicioMeteorologico;
+import org.example.servicioMeteorologico.ServicioMeteorologico;
 import org.example.Usuario;
 
 public class MotorDeSugerencias {
@@ -22,10 +22,10 @@ public class MotorDeSugerencias {
   public List<Atuendo> sugerirAtuendos(List<Prenda> prendas, Usuario usuario) {
     List<Prenda> prendasValidas = this.filtrarPorTemperatura(prendas, usuario);
 
-    return this.combinarPrendas(prendasValidas, usuario);
+    return this.combinarPrendas(prendasValidas);
   }
 
-  public List<Atuendo> combinarPrendas(List<Prenda> prendas, Usuario usuario) {
+  private List<Atuendo> combinarPrendas(List<Prenda> prendas) {
     List<Prenda> prendasSuperiores = this.filtrarPorCategoria(prendas, Categoria.PARTE_SUPERIOR);
     List<Prenda> prendasInferiores = this.filtrarPorCategoria(prendas, Categoria.PARTE_INFERIOR);
     List<Prenda> calzados = this.filtrarPorCategoria(prendas, Categoria.CALZADO);

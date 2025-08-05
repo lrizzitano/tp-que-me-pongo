@@ -1,4 +1,4 @@
-package org.example.ServicioMeteorologico;
+package org.example.servicioMeteorologico;
 
 public class ProveedorDeServicioMeteorologico {
   private static final ProveedorDeServicioMeteorologico instance = new ProveedorDeServicioMeteorologico();

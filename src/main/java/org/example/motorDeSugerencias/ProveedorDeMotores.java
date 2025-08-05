@@ -1,4 +1,4 @@
-package org.example.MotorDeSugerencias;
+package org.example.motorDeSugerencias;
 
 public class ProveedorDeMotores {
   private static final ProveedorDeMotores instance = new ProveedorDeMotores();

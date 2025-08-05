@@ -3,11 +3,52 @@
 class Usuario {
     - edad: int
     - ciudad: String
-    - prendas: Prenda[]
+    - borradores: PrendaBorrador[]
+    - guardaropas: Guardaropa[]
     - motorDeSugerencias: MotorDeSugerencias
     --
-    + guardarBorrador(PrendaBorrador)
+    + getPrendasDisponibles()
+    + guardarBorrador(borrador, guardaropa)
     + sugerirAtuendos()
+}
+
+class Guardaropa {
+    - nombre: String
+    - prendas: Prenda[]
+    --
+    + agregarPrenda(prenda)
+    + quitarPrenda(prenda)
+}
+
+class GuardaropaCompartido extends Guardaropa {
+    - propuestasPendientes: PropuestaDeCambio[]
+    - propuestasAceptadas: PropuestaDeCambio[]
+    --
+    + agregarPropuesta(propuesta)
+    + aceptarPropuesta(propuesta)
+    + deshacerPropuesta(propuesta)
+    + rechazarPropueta(propuesta)
+}
+
+abstract class PropuestaDeCambio {
+    # prenda: Prenda
+    # guardaropa: GuardaropaCompartido
+    --
+    + {abstract} aceptar()
+    + {abstract} deshacer()
+    + rechazar()
+}
+
+class PropuestaDeAgregado extends PropuestaDeCambio {
+    --
+    + aplicar()
+    + deshacer()
+}
+
+class PropuestaDeQuitado extends PropuestaDeCambio {
+    --
+    + aplicar()
+    + deshacer()
 }
 
 class Atuendo {
@@ -132,21 +173,27 @@ enum Formalidad {
 Atuendo -->"*" Prenda
 Atuendo -[hidden]r- PrendaBorrador
 
-Usuario -->"*" Prenda
 Usuario --> PrendaBorrador
 Usuario -->"*" Atuendo
 Usuario -l-> MotorDeSugerencias
+Usuario "*"-r->"*" Guardaropa
+
+Guardaropa -->"*" Prenda
+
+GuardaropaCompartido -->"*" PropuestaDeCambio
+
+PropuestaDeCambio --> Prenda
 
 PrendaBorrador ..> Prenda
 
-Prenda -l-> TipoDePrenda
+Prenda --> TipoDePrenda
 Prenda --> Material
 Prenda --> Trama
 Prenda --> Formalidad
-Prenda -> Color
+Prenda --> Color
 
 TipoDePrenda --> Categoria
-TipoDePrenda -l-> RangoDeTemperaturas
+TipoDePrenda --> RangoDeTemperaturas
 
 MotorDeSugerencias .r.> Atuendo
 MotorDeSugerencias -l-> ServicioMeteorologico

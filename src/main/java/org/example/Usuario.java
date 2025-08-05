@@ -2,21 +2,23 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.example.MotorDeSugerencias.MotorDeSugerencias;
-import org.example.MotorDeSugerencias.ProveedorDeMotores;
-import org.example.Prenda.Prenda;
-import org.example.Prenda.PrendaBorrador;
+import org.example.motorDeSugerencias.MotorDeSugerencias;
+import org.example.motorDeSugerencias.ProveedorDeMotores;
+import org.example.prenda.Prenda;
+import org.example.prenda.PrendaBorrador;
 
 public class Usuario {
   private int edad;
   private String ciudad;
   private List<Prenda> prendas;
+  private List<PrendaBorrador> borradores;
   private MotorDeSugerencias motorDeSugerencias;
 
   public Usuario(int edad, String ciudad) {
     this.edad = edad;
     this.ciudad = ciudad;
     this.prendas = new ArrayList<>();
+    this.borradores = new ArrayList<>();
     this.motorDeSugerencias = ProveedorDeMotores.instance().getMotorDeSugerencias();
   }
 

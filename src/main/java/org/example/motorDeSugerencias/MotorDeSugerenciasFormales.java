@@ -1,10 +1,10 @@
-package org.example.MotorDeSugerencias;
+package org.example.motorDeSugerencias;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import org.example.Atuendo;
-import org.example.Prenda.Formalidad;
-import org.example.Prenda.Prenda;
+import org.example.prenda.Formalidad;
+import org.example.prenda.Prenda;
 import org.example.Usuario;
 
 public class MotorDeSugerenciasFormales extends MotorDeSugerencias {

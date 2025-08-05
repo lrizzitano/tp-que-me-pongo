@@ -2,8 +2,8 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.example.Exceptions.AtuendoConPocasPrendasException;
-import org.example.Prenda.Prenda;
+import org.example.exceptions.AtuendoConPocasPrendasException;
+import org.example.prenda.Prenda;
 
 public class Atuendo {
   private List<Prenda> prendas = new ArrayList<>();

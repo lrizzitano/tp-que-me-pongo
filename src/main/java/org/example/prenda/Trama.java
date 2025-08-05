@@ -1,4 +1,4 @@
-package org.example.Prenda;
+package org.example.prenda;
 
 public enum Trama {
   LISA, RAYADA, LUNARES, CUADROS, ESTAMPADO
